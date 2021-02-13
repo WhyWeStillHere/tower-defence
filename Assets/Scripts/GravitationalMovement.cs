@@ -14,20 +14,18 @@ public class GravitationalMovement : MonoBehaviour
     [SerializeField]
     private float m_Gravity;
     
-    private const float TOLERANCE = 0.1f;
+    private const float MAX_MOMENTUM_MAGTINUDE = 1000f;
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Vector3 diff = (m_Target - transform.position);
         float distance = diff.magnitude;
-        if (distance < TOLERANCE)
-        {
-            return;
-        }
         
-        Vector3 momentum = diff * (m_Gravity * m_TargetMass) / (distance * distance * distance);
+        Vector3 momentum = Vector3.ClampMagnitude(
+            diff * (m_Gravity * m_TargetMass) / (distance * distance * distance), MAX_MOMENTUM_MAGTINUDE);
         Vector3 delta = m_Speed * Time.fixedDeltaTime + momentum * (Time.fixedDeltaTime * Time.fixedDeltaTime / 2);
+        
         m_Speed += momentum * Time.fixedDeltaTime;
         transform.Translate(delta);
     }

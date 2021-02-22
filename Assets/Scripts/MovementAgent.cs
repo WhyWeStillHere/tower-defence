@@ -21,6 +21,7 @@ public class MovementAgent : MonoBehaviour
         float distance = (m_Target.Value - transform.position).magnitude;
         if (distance < TOLERANCE)
         {
+            m_Target = null;
             return;
         }
         

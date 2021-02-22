@@ -26,10 +26,11 @@ namespace DefaultNamespace
 
         private void OnValidate()
         {
+            m_Cursor.SetActive(false);
+            
             float width = m_GridWidth * m_NodeSize;
             float height = m_GridHeight * m_NodeSize;
             
-            // Default plane size is 10 by 10
             transform.localScale = new Vector3(
                 width * 0.1f,
                 1f, 
@@ -41,6 +42,18 @@ namespace DefaultNamespace
 
         private void Awake()
         {
+            m_Cursor.SetActive(false);
+            
+            float width = m_GridWidth * m_NodeSize;
+            float height = m_GridHeight * m_NodeSize;
+            
+            transform.localScale = new Vector3(
+                width * 0.1f,
+                1f, 
+                height * 0.1f);
+
+            m_Offset = transform.position - 
+                       (new Vector3(width, 0, height) * 0.5f);
             m_Camera = Camera.main;
         }
 

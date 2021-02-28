@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Field
@@ -9,7 +10,13 @@ namespace Field
         private int m_Width;
         private int m_Height;
 
-        public Grid(int width, int height)
+        private FlowFieldPathfinding m_PathFinding;
+
+        public int Width => m_Width;
+
+        public int Height => m_Height;
+
+        public Grid(int width, int height, Vector3 offset, float nodeSize, Vector2Int target, Vector2Int start)
         {
             m_Width = width;
             m_Height = height;
@@ -20,9 +27,13 @@ namespace Field
             {
                 for (int j = 0; j < m_Nodes.GetLength(1); j++)
                 {
-                    m_Nodes[i, j] = new Node();
+                    m_Nodes[i, j] = new Node(offset + new Vector3(i + .5f, 0, j + .5f) * nodeSize);
                 }
             }
+
+            m_PathFinding = new FlowFieldPathfinding(this, target, start);
+            
+            m_PathFinding.UpdateField();
         }
 
         public Node GetNode(Vector2Int coordinate)
@@ -37,6 +48,36 @@ namespace Field
                 return null;
             }
             return m_Nodes[i, j];
+        }
+
+        public IEnumerable<Node> EnumerateAllNodes()
+        {
+            for (int i = 0; i < m_Height; i++)
+            {
+                for (int j = 0; j < m_Height; j++)
+                {
+                    yield return GetNode(i, j);
+                }
+            }
+        }
+
+        public bool TryOccupyNode(Vector2Int coordinate)
+        {
+            if (m_PathFinding.CanOccupy(coordinate))
+            {
+                GetNode(coordinate).m_IsOccupied = true;
+                UpdatePathFinding();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void UpdatePathFinding()
+        {
+            m_PathFinding.UpdateField();
         }
     }
 }

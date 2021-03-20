@@ -12,9 +12,9 @@ namespace Field
         private int m_GridHeight;
 
         [SerializeField] 
-        private Vector2Int m_TargetCoordiate;
-        [SerializeField] 
         private Vector2Int m_StartCoordinate;
+        [SerializeField] 
+        private Vector2Int m_TargetCoordiate;
         
         [SerializeField]
         private float m_NodeSize;
@@ -29,7 +29,7 @@ namespace Field
 
         public Grid MGrid => m_Grid;
 
-        private void Start()
+        public void CreateGrid()
         {
             m_Camera = Camera.main;
 
@@ -45,9 +45,9 @@ namespace Field
             m_Offset = transform.position - 
                        (new Vector3(width, 0, height) * 0.5f);
              
-            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_TargetCoordiate, m_StartCoordinate);
+            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_StartCoordinate, m_TargetCoordiate);
         }
-        
+
         private void OnValidate()
         {
             float width = m_GridWidth * m_NodeSize;
@@ -62,10 +62,10 @@ namespace Field
             m_Offset = transform.position - 
                        (new Vector3(width, 0, height) * 0.5f);
              
-            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_TargetCoordiate, m_StartCoordinate);
+            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_StartCoordinate, m_TargetCoordiate);
         }
 
-        private void Update()
+        public void RaycastInGrid()
         {
             if (m_Grid == null || m_Camera == null)
             {
@@ -93,7 +93,9 @@ namespace Field
                     0,
                     y * m_NodeSize + m_Offset.z + m_NodeSize * 0.5f);
 
-                if (Input.GetMouseButtonDown(0))
+                
+                m_Grid.SelectCoordinate(new Vector2Int(x, y));
+                /*if (Input.GetMouseButtonDown(0))
                 {
                     m_Grid.TryOccupyNode(new Vector2Int(x, y));
                 }
@@ -106,7 +108,11 @@ namespace Field
                         gridNode.m_IsOccupied = false;
                         m_Grid.UpdatePathFinding();
                     }
-                }
+                }*/
+            }
+            else
+            {
+                m_Grid.UnselectNode();
             }
         }
 

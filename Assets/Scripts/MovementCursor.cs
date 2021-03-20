@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Enemy
 {
     public class MovementCursor : MonoBehaviour
     {

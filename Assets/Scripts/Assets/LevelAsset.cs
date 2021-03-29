@@ -1,3 +1,4 @@
+using TurretSpawn;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,5 +9,6 @@ namespace Assets
     {
         public SceneAsset sceneAsset;
         public SpawnWavesAsset spawnWavesAsset;
+        public TurretMarketAsset TurretMarketAsset;
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Enemy;
 using UnityEngine;
 
 namespace Field
@@ -9,6 +11,7 @@ namespace Field
         public Node m_NextNode;
         public bool m_IsOccupied;
         public OccupationAvailability m_OccupationAvailability;
+        public List<EnemyData> EnemyDatas;
 
         public float m_PathWeight;
 
@@ -16,6 +19,7 @@ namespace Field
         {
             m_Position = mPosition;
             m_OccupationAvailability = OccupationAvailability.Undefined;
+            EnemyDatas = new List<EnemyData>();
         }
         
         public void ResetWeight()

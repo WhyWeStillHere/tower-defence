@@ -4,6 +4,7 @@ using Enemy;
 using EnemySpawn;
 using Field;
 using NUnit.Framework.Constraints;
+using TurretSpawn;
 using UnityEngine;
 
 namespace Runtime
@@ -40,8 +41,9 @@ namespace Runtime
         {
             m_Controllers = new List<IController>()
             {
-                new GridPointerController(Game.SPLayer.gridHolder),
+                new GridRaycastController(Game.SPLayer.gridHolder),
                 new EnemySpawnController(Game.SCurrentLevel.spawnWavesAsset, Game.SPLayer.grid),
+                new TurretSpawnController(Game.SPLayer.grid, Game.SPLayer.turretMarket),
                 new MovementController(),
             };
         }

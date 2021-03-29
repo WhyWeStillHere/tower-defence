@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Field
@@ -9,6 +11,8 @@ namespace Field
 
         private int m_Width;
         private int m_Height;
+        private Vector3 m_Offset;
+        private float m_NodeSize;
 
         private Vector2Int m_StartCoordinate;
         private Vector2Int m_TargetCoordinate;
@@ -25,6 +29,8 @@ namespace Field
         {
             m_Width = width;
             m_Height = height;
+            m_Offset = offset;
+            m_NodeSize = nodeSize;
 
             m_StartCoordinate = start;
             m_TargetCoordinate = target;
@@ -86,6 +92,47 @@ namespace Field
             return m_Nodes[i, j];
         }
 
+        public Node GetNodeAtPoint(Vector3 point)
+        {
+            Vector3 difference = point - m_Offset;
+            int x = (int) (difference.x / m_NodeSize);
+            int y = (int) (difference.z / m_NodeSize);
+            return GetNode(x, y);
+        }
+
+        public Vector3 GetNodeCenter(int x, int y)
+        {
+            Vector3 center = m_Offset;
+            center.x += (x + .5f) * m_NodeSize;
+            center.z += (y + .5f) * m_NodeSize;
+            return center;
+        }
+
+        public List<Node> GetNodesInCircle(Vector3 point, float radius)
+        {
+            int x_start = Math.Max((int) (point.x - radius), 0);
+            int x_end = Math.Min((int) (point.x + radius + 1), m_Width - 1);
+            int y_start = Math.Max((int) (point.y - radius), 0);
+            int y_end = Math.Min((int) (point.y + radius + 1), m_Height - 1);
+            
+            float sqrRadius = radius * radius;
+            List<Node> nodes = new List<Node>();
+            
+            for (int i = x_start; i <= x_end; ++i)
+            {
+                for (int j = y_start; j <= y_end; ++j)
+                {
+                    Vector3 nodeCenter = GetNodeCenter(i, j);
+                    if ((nodeCenter - point).sqrMagnitude < sqrRadius)
+                    {
+                        nodes.Add(GetNode(i, j));
+                    }
+                }
+            }
+
+            return nodes;
+        }
+
         public IEnumerable<Node> EnumerateAllNodes()
         {
             for (int i = 0; i < m_Height; i++)
@@ -109,6 +156,19 @@ namespace Field
             {
                 return false;
             }
+        }
+
+        public Vector2Int GetNodeCoordinate(Node node)
+        {
+            Vector3 difference = node.m_Position - m_Offset;
+            int x = (int) (difference.x / m_NodeSize);
+            int y = (int) (difference.z / m_NodeSize);
+            return new Vector2Int(x, y);
+        }
+
+        public bool CanOccupy(Vector2Int coordinate)
+        {
+            return m_PathFinding.CanOccupy(coordinate);
         }
 
         public void UpdatePathFinding()

@@ -110,10 +110,14 @@ namespace Field
 
         public List<Node> GetNodesInCircle(Vector3 point, float radius)
         {
-            int x_start = Math.Max((int) (point.x - radius), 0);
-            int x_end = Math.Min((int) (point.x + radius + 1), m_Width - 1);
-            int y_start = Math.Max((int) (point.y - radius), 0);
-            int y_end = Math.Min((int) (point.y + radius + 1), m_Height - 1);
+            Vector3 difference = point - m_Offset;
+            int x = (int) (difference.x / m_NodeSize);
+            int y = (int) (difference.z / m_NodeSize);
+            
+            int x_start = Math.Max((int) (x - radius), 0);
+            int x_end = Math.Min((int) (x + radius + 1), m_Width - 1);
+            int y_start = Math.Max((int) (y - radius), 0);
+            int y_end = Math.Min((int) (y + radius + 1), m_Height - 1);
             
             float sqrRadius = radius * radius;
             List<Node> nodes = new List<Node>();

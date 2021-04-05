@@ -51,14 +51,18 @@ namespace Enemy
             Vector3 delta = dir * (m_Speed * Time.deltaTime);
             
             m_Transform.Translate(delta);
-            if (currentNode != null)
+            Node newNode = m_Grid.GetNodeAtPoint(m_Transform.position);
+            if (currentNode != newNode)
             {
-                currentNode.EnemyDatas.Remove(m_EnemyData);
-            }
-            currentNode = m_Grid.GetNodeAtPoint(m_Transform.position);
-            if (currentNode != null)
-            {
-                currentNode.EnemyDatas.Add(m_EnemyData);
+                if (currentNode != null)
+                {
+                    currentNode.EnemyDatas.Remove(m_EnemyData);
+                }
+                if (newNode != null)
+                {
+                    newNode.EnemyDatas.Add(m_EnemyData);
+                }
+                currentNode = newNode;
             }
         }
 

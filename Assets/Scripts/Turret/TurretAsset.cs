@@ -1,3 +1,4 @@
+using Turret.Weapon;
 using UnityEngine;
 
 namespace Turret
@@ -6,7 +7,7 @@ namespace Turret
     public class TurretAsset : ScriptableObject
     {
         public TurretView viewPrefab;
-        
+        public TurretWeaponAssetBase WeaponAsset;
         public TurretAsset(TurretView viewPrefab)
         {
             this.viewPrefab = viewPrefab;

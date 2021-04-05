@@ -4,6 +4,7 @@ using Enemy;
 using EnemySpawn;
 using Field;
 using NUnit.Framework.Constraints;
+using Turret.Weapon;
 using TurretSpawn;
 using UnityEngine;
 
@@ -45,6 +46,7 @@ namespace Runtime
                 new EnemySpawnController(Game.SCurrentLevel.spawnWavesAsset, Game.SPLayer.grid),
                 new TurretSpawnController(Game.SPLayer.grid, Game.SPLayer.turretMarket),
                 new MovementController(),
+                new TurretShootController(),
             };
         }
 

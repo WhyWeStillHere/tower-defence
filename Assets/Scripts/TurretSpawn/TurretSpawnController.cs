@@ -33,7 +33,7 @@ namespace TurretSpawn
             {
                 Node selectedNode = m_Grid.GetSelectedNode();
 
-                if (selectedNode.m_IsOccupied /* && m_Grid.CanOccupy*/)
+                if (!m_Grid.CanOccupy(m_Grid.GetNodeCoordinate(selectedNode)))
                 {
                     return;
                 }
@@ -48,28 +48,9 @@ namespace TurretSpawn
             TurretData data = new TurretData(asset, node);
             
             data.AttachView(view);
-
-            node.m_IsOccupied = true; // TryOccupy()
-            m_Grid.UpdatePathFinding();
+            Game.SPLayer.TurretSpawned(data);
+            
+            m_Grid.TryOccupyNode(m_Grid.GetNodeCoordinate(node));
         }
     }
 }
-
-/*                if (!m_Grid.CanOccupy(m_Grid.GetNodeCoordinate(selectedNode)))
-                {
-                    return;
-                }
-                
-                SpawnTurret(m_Market.ChosenTurret, selectedNode);
-            }
-        }
-
-        private void SpawnTurret(TurretAsset asset, Node node)
-        {
-            TurretView view = Object.Instantiate(asset.viewPrefab);
-            TurretData data = new TurretData(asset, node);
-            
-            data.AttachView(view);
-
-            m_Grid.TryOccupyNode(m_Grid.GetNodeCoordinate(node));
-        }*/

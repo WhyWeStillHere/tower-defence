@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8327bfec1fcf4339816f0874860b2c49, type: 3}
+  m_Name: Spawn Waves Asset
+  m_EditorClassIdentifier: 
+  SpawnWaves:
+  - enemyAsset: {fileID: 11400000, guid: be80fde689c4e804488c36d01dd8d2c8, type: 2}
+    count: 5
+    timeBetweenSpawns: 1
+    timeBeforeStartWave: 1
+  - enemyAsset: {fileID: 11400000, guid: 89015e49c82e18c4c82ec35b812323b5, type: 2}
+    count: 10
+    timeBetweenSpawns: 0.4
+    timeBeforeStartWave: 2

@@ -139,7 +139,7 @@ namespace Field
 
         public IEnumerable<Node> EnumerateAllNodes()
         {
-            for (int i = 0; i < m_Height; i++)
+            for (int i = 0; i < m_Width; i++)
             {
                 for (int j = 0; j < m_Height; j++)
                 {

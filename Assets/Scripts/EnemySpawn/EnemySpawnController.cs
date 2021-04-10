@@ -64,7 +64,7 @@ namespace EnemySpawn
             Vector3 nodePosition = m_Grid.GetStartNode().m_Position;
             view.transform.position = new Vector3(
                 nodePosition.x,
-                data.m_Asset.viewPrefab.transform.position.y,
+                data.MAsset.viewPrefab.transform.position.y,
                 nodePosition.z
             );
             

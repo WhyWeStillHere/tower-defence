@@ -7,6 +7,7 @@ namespace Enemy
     {
         public float startHealth;
         public bool isFlyingEnemy;
+        public float speed;
 
         public EnemyView viewPrefab;
     }

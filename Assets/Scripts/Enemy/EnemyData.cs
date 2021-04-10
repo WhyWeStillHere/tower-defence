@@ -6,11 +6,16 @@ namespace Enemy
     public class EnemyData
     {
         private EnemyView m_View;
+        private EnemyAsset m_Asset;
+
+
+        private float m_Speed;
         private float m_Health;
 
         public EnemyView MView => m_View;
-
-        public readonly EnemyAsset m_Asset;
+        
+        public EnemyAsset MAsset => m_Asset;
+        
 
         public EnemyData(EnemyAsset asset)
         {
@@ -27,7 +32,7 @@ namespace Enemy
         public void GetDamage(float damage)
         {
             m_Health -= damage;
-            if (m_Health < 0)
+            if (m_Health <= 0)
             {
                 Die();
             }

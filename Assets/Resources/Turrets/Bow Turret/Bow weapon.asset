@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0e1ceba33e642948619e868f7956441, type: 3}
-  m_Name: Turret
+  m_Script: {fileID: 11500000, guid: 77d35a8a31b4475eb0744f5ad6d29864, type: 3}
+  m_Name: Bow weapon
   m_EditorClassIdentifier: 
-  viewPrefab: {fileID: 8537211371941670847, guid: 2f7b2be8ad0f84d4ca9c40d1b14e9236, type: 3}
-  WeaponAsset: {fileID: 11400000, guid: 80063ccb6947c524bb798fcbf511bff9, type: 2}
+  rateOfFire: 0
+  maxDistance: 0
+  projectileAsset: {fileID: 0}

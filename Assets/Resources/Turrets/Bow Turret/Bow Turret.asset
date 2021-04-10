@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b9c88c6bcc8476fa1294839aae740bd, type: 3}
-  m_Name: Bullet
+  m_Script: {fileID: 11500000, guid: b0e1ceba33e642948619e868f7956441, type: 3}
+  m_Name: Bow t
   m_EditorClassIdentifier: 
-  m_BulletPrefab: {fileID: 3555176119344559892, guid: f6a20796ddc605e4183021a6bf7f6fe1, type: 3}
+  viewPrefab: {fileID: 0}
+  WeaponAsset: {fileID: 0}

@@ -7,8 +7,10 @@ namespace Enemy
 {
     public class EnemyView : MonoBehaviour
     {
+        [SerializeField] private Animator m_Animator;
         private EnemyData m_Data;
         private IMovementAgent m_MovementAgent;
+        private static readonly int Dead = Animator.StringToHash("Dead");
 
         public EnemyData MData => m_Data;
 
@@ -29,6 +31,12 @@ namespace Enemy
             {
                 m_MovementAgent = new GridMovementAgent(m_Data.MAsset.speed, transform, grid, m_Data);
             }
+        }
+
+        public void Die()
+        {
+            m_MovementAgent.Die();
+            m_Animator.SetTrigger(Dead);
         }
     }
 }

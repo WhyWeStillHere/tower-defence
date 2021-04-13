@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d35a8a31b4475eb0744f5ad6d29864, type: 3}
   m_Name: Bow weapon
   m_EditorClassIdentifier: 
-  rateOfFire: 0
-  maxDistance: 0
-  projectileAsset: {fileID: 0}
+  rateOfFire: 2.5
+  maxDistance: 10
+  projectileAsset: {fileID: 11400000, guid: 3e33e59a5acae6e4bac5c07adb81fd6d, type: 2}

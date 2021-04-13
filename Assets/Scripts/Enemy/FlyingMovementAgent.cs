@@ -70,6 +70,11 @@ namespace Enemy
                 currentNode = newNode;
             }
         }
+        
+        public void Die()
+        {
+            currentNode?.EnemyDatas.Remove(m_EnemyData);
+        }
 
         private void SetTargetNode(Node node)
         {
